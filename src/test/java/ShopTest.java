@@ -19,7 +19,7 @@ public class ShopTest {
 
     @Before
     public void setup(){
-        shop = new Shop("Guitar Guitar");
+        shop = new Shop("Guitar Guitar", 2000);
         guitar = new Guitar("Black", InstrumentType.GUITAR, 100, 250, GuitarType.ACOUSTIC);
         drumsticks = new DrumStick("Steve Gadd Brushes", 5, 10, "White");
         drumkit = new Drumkit("Black", InstrumentType.PERCUSSION, 250, 500, DrumkitType.ACOUSTIC);
@@ -67,5 +67,34 @@ public class ShopTest {
         shop.addToStock(guitar);
         shop.addToStock(drumsticks);
         assertEquals(155, shop.calculatePotentialProfit());
+    }
+
+    @Test
+    public void shopStartsWith2000Pounds(){
+        assertEquals(2000, shop.getMoney());
+    }
+
+    @Test
+    public void shopCanIncreaseProfit(){
+        shop.increaseProfit(100);
+        assertEquals(2100, shop.getMoney());
+    }
+
+    @Test
+    public void shopMustHaveFundsToAddItemsToStock(){
+        assertEquals(true, shop.canAffordInstrument(drumkit));
+    }
+
+    @Test
+    public void shopMustUseMoneyToAddItemsToStock(){
+        shop.addInstrumentToStock(drumkit);
+        assertEquals(1750, shop.getMoney());
+    }
+
+    @Test
+    public void shopUsesMoneyToAddAccessoriesToStock(){
+        shop.addAccessoryToStock(drumsticks);
+        assertEquals(1995, shop.getMoney());
+
     }
 }
