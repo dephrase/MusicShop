@@ -1,5 +1,6 @@
 package accessories;
 
+import enums.AccessoryType;
 import enums.GuitarStringType;
 
 public class GuitarString extends Accessory{
@@ -9,6 +10,7 @@ public class GuitarString extends Accessory{
     public GuitarString(String name, int buyPrice, int sellPrice, GuitarStringType stringType) {
         super(name, buyPrice, sellPrice);
         this.stringType = stringType;
+        setAccessoryType(AccessoryType.GUITARSTRINGS);
     }
 
     @Override

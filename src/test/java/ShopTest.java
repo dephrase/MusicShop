@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import shop.Shop;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class ShopTest {
 
@@ -95,6 +95,30 @@ public class ShopTest {
     public void shopUsesMoneyToAddAccessoriesToStock(){
         shop.addAccessoryToStock(drumsticks);
         assertEquals(1995, shop.getMoney());
+    }
 
+    @Test
+    public void canCheckIfItemIsInStock(){
+        shop.addInstrumentToStock(drumkit);
+        shop.addAccessoryToStock(drumsticks);
+        assertTrue(shop.isInstrumentInStock("Percussion"));
+    }
+
+    @Test
+    public void canCheckIfItemIsNotInStock(){
+        shop.addAccessoryToStock(drumsticks);
+        assertFalse(shop.isInstrumentInStock("Percussion"));
+    }
+
+    @Test
+    public void canCheckIfAccessoryIsInStock(){
+        shop.addAccessoryToStock(drumsticks);
+        assertTrue(shop.isAccessoryInStock("Drum Sticks"));
+    }
+
+    @Test
+    public void canCheckIfAccessoryIsNotInStock(){
+        shop.addInstrumentToStock(drumkit);
+        assertFalse(shop.isAccessoryInStock("Drum Sticks"));
     }
 }

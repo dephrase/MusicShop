@@ -1,5 +1,7 @@
 package accessories;
 
+import enums.AccessoryType;
+
 public class DrumStick extends Accessory{
 
     private String colour;
@@ -7,6 +9,7 @@ public class DrumStick extends Accessory{
     public DrumStick(String name, int buyPrice, int sellPrice, String colour) {
         super(name, buyPrice, sellPrice);
         this.colour = colour;
+        setAccessoryType(AccessoryType.DRUMSTICKS);
     }
 
     public String getColour() {

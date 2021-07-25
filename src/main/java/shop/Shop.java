@@ -2,6 +2,7 @@ package shop;
 
 import accessories.Accessory;
 import accessories.DrumStick;
+import enums.InstrumentType;
 import instruments.Drumkit;
 import instruments.Instrument;
 import interfaces.ISell;
@@ -22,7 +23,6 @@ public class Shop {
 
     public void addToStock(ISell item){
         stock.add(item);
-
     }
 
     public void removeFromStock(ISell item){
@@ -79,5 +79,29 @@ public class Shop {
 
     public ArrayList<ISell> getStock() {
         return stock;
+    }
+
+    public boolean isInstrumentInStock(String instrumentType) {
+        boolean inStock = false;
+        for(ISell item: stock){
+            if(item instanceof Instrument){
+                if(((Instrument) item).getInstrumentType().getType().equals(instrumentType)){
+                    inStock = true;
+                }
+            }
+        }
+        return inStock;
+    }
+
+    public boolean isAccessoryInStock(String accessorySearch) {
+        boolean inStock = false;
+        for(ISell item: stock){
+            if(item instanceof Accessory){
+                if(((Accessory) item).getAccessoryType().getValue().equals(accessorySearch)){
+                    inStock = true;
+                }
+            }
+        }
+        return inStock;
     }
 }
