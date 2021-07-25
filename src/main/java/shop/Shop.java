@@ -2,12 +2,14 @@ package shop;
 
 import accessories.Accessory;
 import accessories.DrumStick;
+import enums.AccessoryType;
 import enums.InstrumentType;
 import instruments.Drumkit;
 import instruments.Instrument;
 import interfaces.ISell;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Shop {
 
@@ -103,5 +105,29 @@ public class Shop {
             }
         }
         return inStock;
+    }
+
+    public ArrayList<Instrument> getAvailableInstruments(InstrumentType instrumentType) {
+        ArrayList<Instrument> instruments = new ArrayList<>();
+        for(ISell item: stock){
+            if(item instanceof Instrument){
+                if(((Instrument) item).getInstrumentType() == instrumentType){
+                    instruments.add((Instrument)item);
+                }
+            }
+        }
+        return instruments;
+    }
+
+    public ArrayList<Accessory> getAvailableAccessories(AccessoryType accessoryType) {
+        ArrayList<Accessory> accessories = new ArrayList<>();
+        for(ISell item: stock){
+            if(item instanceof Accessory){
+                if (((Accessory) item).getAccessoryType() == accessoryType){
+                    accessories.add((Accessory) item);
+                }
+            }
+        }
+        return accessories;
     }
 }

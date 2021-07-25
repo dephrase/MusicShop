@@ -1,12 +1,16 @@
 import accessories.DrumStick;
+import enums.AccessoryType;
 import enums.DrumkitType;
 import enums.GuitarType;
 import enums.InstrumentType;
 import instruments.Drumkit;
 import instruments.Guitar;
+import instruments.Instrument;
 import org.junit.Before;
 import org.junit.Test;
 import shop.Shop;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -121,4 +125,25 @@ public class ShopTest {
         shop.addInstrumentToStock(drumkit);
         assertFalse(shop.isAccessoryInStock("Drum Sticks"));
     }
+
+    @Test
+    public void canReturnListOfAvailableInstruments(){
+        shop.addToStock(drumkit);
+        Drumkit newKit = new Drumkit("White", InstrumentType.PERCUSSION, 100, 400, DrumkitType.ACOUSTIC);
+        shop.addToStock(newKit);
+        assertEquals(2, shop.getAvailableInstruments(InstrumentType.PERCUSSION).size());
+    }
+
+    @Test
+    public void canReturnListOfAvailableAccessories(){
+        shop.addToStock(drumsticks);
+        assertEquals(1, shop.getAvailableAccessories(AccessoryType.DRUMSTICKS).size());
+    }
+
+//    @Test
+//    public void displayListOfAvailableInstrumentsToCustomer(){
+//        shop.addToStock(drumkit);
+//        ArrayList<Instrument> available = shop.getAvailableInstruments(InstrumentType.PERCUSSION);
+//        assertEquals("test", shop.displayListOfItems(available));
+//    }
 }
